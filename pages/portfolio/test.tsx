@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import { useRouter } from "next/router";
+// import { useRouter } from "next/router";
 import { useQuery } from "@tanstack/react-query";
 
 import Layout from "components/layout";
@@ -15,7 +15,7 @@ type ProjectDataType = {
 };
 
 const PortfolioList = () => {
-  const { replace } = useRouter();
+  // const { replace } = useRouter();
   const { data, error } = useQuery(["portfolio"], GET_PROJECT_LIST_AXIOS);
   const projects: ProjectDataType[] = data?.data;
 
@@ -42,7 +42,7 @@ const PortfolioList = () => {
       </Layout>
     );
   } else if (error) {
-    replace("/404");
+    // replace("/404");
     return (
       <Layout title={"Portfolio"}>
         <FullpageSpinenr />

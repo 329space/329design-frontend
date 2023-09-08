@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
-import { useQuery } from "@apollo/client";
+import { useQuery } from "@tanstack/react-query";
 import { ChevronLeftIcon } from "@heroicons/react/24/solid";
 
 import Layout from "components/layout";
@@ -10,7 +10,7 @@ import InfoSection from "components/portfolio/info";
 import Thumbnails from "components/portfolio/thumbnails";
 import ImageDialog from "components/portfolio/dialog";
 import Modal from "components/modal";
-import { GET_PROJECT_BY_ID } from "pages/api/portfolio";
+import { GET_PROJECT_BY_ID_AXIOS } from "pages/api/portfolio";
 
 export type ImgDataType = { id: number; attributes: { name: string; url: string } };
 
@@ -32,15 +32,14 @@ type ProjectDataType = {
 
 const Portfolio = () => {
   const { query } = useRouter();
-  const { data } = useQuery(GET_PROJECT_BY_ID, {
-    variables: { id: query.id },
+  const { data } = useQuery(["project"], () => GET_PROJECT_BY_ID_AXIOS(query.id as string), {
+    enabled: Boolean(query.id),
   });
-
-  const project: ProjectDataType = data?.project?.data;
+  const project: ProjectDataType = data?.data[0];
   const [open, setOpen] = useState(false);
   const [imageIndex, setImageIndex] = useState<number>(0);
 
-  // if (loading) {
+  // if (isLoading) {
   //   return (
   //     <Layout title={"Portfolio"}>
   //       <FullpageSpinenr />
