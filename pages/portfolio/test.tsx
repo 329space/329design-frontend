@@ -1,11 +1,11 @@
 import React from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useQuery } from "@apollo/client";
+import { useQuery } from "@tanstack/react-query";
 
 import Layout from "components/layout";
 import FullpageSpinenr from "components/spinner/fullpage";
-import { GET_PROJECTS_LIST } from "pages/api/portfolio";
+import { GET_PROJECT_LIST_AXIOS } from "pages/api/portfolio";
 
 type ProjectDataType = {
   attributes: {
@@ -16,17 +16,16 @@ type ProjectDataType = {
 
 const PortfolioList = () => {
   const { replace } = useRouter();
-  const { data, error } = useQuery(GET_PROJECTS_LIST);
+  const { data, error } = useQuery(["portfolio"], GET_PROJECT_LIST_AXIOS);
+  const projects: ProjectDataType[] = data?.data;
 
-  const projects: ProjectDataType[] = data?.projects?.data;
-
-  // if (loading) {
+  // if (isLoading) {
   //   return (
   //     <Layout title={"Portfolio"}>
   //       <FullpageSpinenr />
   //     </Layout>
   //   );
-  // }
+  // } else
   if (data) {
     return (
       <Layout title={"Portfolio"}>

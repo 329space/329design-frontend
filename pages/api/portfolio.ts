@@ -1,4 +1,14 @@
 import { gql } from "@apollo/client";
+import axios from "axios";
+
+export const GET_PROJECT_LIST_AXIOS = async () => {
+  const res = await axios.get("/api/?populate=*", {
+    headers: {
+      Authorization: `Bearer ${process.env.NEXT_PUBLIC_API_TOKEN}`,
+    },
+  });
+  return res.data;
+};
 
 export const GET_PROJECTS_LIST = gql`
   query Projects {
