@@ -17,7 +17,7 @@ export default function Document() {
         <meta property="og:description" content="더 나은 공간을 고민하고 연구합니다." />
         <meta property="og:site_name" content="329디자인 | 329Design" />
         <meta property="og:locale" content="ko_KR" />
-        <meta name="naver-site-verification" content="a503038f047e43414cd7480296ef2a397381003d" />
+        <meta name="naver-site-verification" content="2a20df5103e91f80d63ef73c1a7ea2f230e2ba62" />
         <meta
           name="google-site-verification"
           content="9L4pCPdg-SVewotr4vo_iishXAFU9GssbVI4ic3MmCI"
